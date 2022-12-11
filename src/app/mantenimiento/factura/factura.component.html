@@ -1,0 +1,46 @@
+<div nz-row nzJustify="center" nzAlign="middle">
+    <div nz-col nzSpan="24" nzJustify="center">
+        <h1>Producto</h1>
+    </div>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="24"><button (click)="mostar()" nz-button nz-Type="primary">Nuevo Producto</button></div>
+</div>
+
+<nz-table #basicTable [nzData]="factura">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Descripcion</th>
+        <th>Valor</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{data.Descripcion}</td>
+        <td>{{data.valor}}</td>
+        
+        <td>
+          <a (click)="mostar(data)"><i nz-icon nzType="edit" nzTheme="twotone"></i></a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a nz-popconfirm nzPopconfirmTitle="¿Esta seguro de borrar el registro?" nzPopConfirmPlacement="buttom"
+          (nzOnConfirm)="eliminar(data.id)" (nzOnCancel)="cancel()"> nzShape=circle nzCancelText="No" nzOkText="Si"
+          <i nz-icon nzType="delete" nzTheme="outline"></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-modal [(nzVisible)]="Visible" nzTitle="Administracion Factura">
+    <ng-container *nzModalContent>
+      <p>Content one</p>
+      <p>Content two</p>
+      <p>Content three</p>
+    </ng-container>
+    <div *nzModalFooter>
+        <button nz-button nzType="default" (click)="ocultar()">Cancelar</button>
+        <button nz-button nzType="primary" (click)="guardar()">Guardar</button>
+    </div>
+  </nz-modal>
